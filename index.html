@@ -63,14 +63,100 @@
         </form>
         <tl-navigator-path></tl-navigator-path>
     </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span id="closePopup" class="close-button">&times;</span>
+            <h3>New website</h3>
+            <div>
+                Please use a new address: <a href="https://translocator.moe">translocator.moe</a>.<br>
+                It's much faster and has more features.
+            </div>
+        </div>
+    </div>
     <footer class="footer">
         <hr>
+        Please check the new version: <a href="https://translocator.moe">translocator.moe</a><br>
         Source repository: <a href="https://github.com/herrscher-of-sleeping/tl-navigator">https://github.com/herrscher-of-sleeping/tl-navigator</a><br>
         mail:
         <a href="mailto:herrscher.of.the.tea@gmail.com">herrscher.of.the.tea@gmail.com</a>,
         Discord: raiden_fumo
     </footer>
     <script src="./index.js" type="module"></script>
+    <style>
+    .popup {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(186, 186, 186, 0.668);
+        z-index: 1000;
+    }
+
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .popup {
+            background-color: rgba(203, 203, 203, 0.668);
+        }
+        .popup-content {
+            box-shadow: 4px 4px 4px rgba(255, 255, 255, 0.2);
+        }
+        .popup, .popup-content, .close-button {
+            background-color: rgba(0, 0, 0, 0.668);
+        }
+        .popup-content, .close-button {
+            background-color: rgb(35, 35, 35);
+            color: white;
+        }
+    }
+    .footer {
+        height: 5rem;
+    }
+    .app {
+        padding-bottom: 5rem;
+    }
+    </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const popup = document.getElementById("popup");
+        const closePopup = document.getElementById("closePopup");
+
+        popup.addEventListener("click", function(e) {
+            if (e.target === popup) {
+                popup.style.display = "none";
+            }
+        });
+        closePopup.addEventListener("click", function() {
+            popup.style.display = "none";
+        });
+        document.onkeydown = function(e) {
+            if (e.key === "Escape") {
+                popup.style.display = "none";
+            }
+        };
+    });
+    </script>
 </body>
 
 </html>
